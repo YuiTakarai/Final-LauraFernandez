@@ -1,0 +1,28 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+
+{% for n in category_posts %}
+<div class="card mb-3" style="max-width: 540px; margin: auto;">
+<div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{n.imagenblog.url}}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{n.titulo}} | {{n.subtitulo}}</h5>
+        <h6 class="card-title">{{n.autor}} | {{n.publicado}}</h6>
+        <p>{{n.categoria.nombre}}</p>
+        
+      </div>
+    </div>
+  </div>
+
+
+{% endfor %}
+
+
+
+</div>
+{% endblock %}

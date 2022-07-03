@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <p>Categoría Nombre:</p>
+        <input type="text" name="nombre">
+
+        <input type="submit" value="submit">
+
+    </form>
+</body>
+{% endblock %}

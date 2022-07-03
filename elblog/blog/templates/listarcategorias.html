@@ -1,0 +1,22 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+   
+    {% if  request.user.is_authenticated %}
+
+<body>
+    {% for n in listado %}
+    
+    <ol>
+    {{n.nombre}}</ol>
+    
+    
+    {% endfor %}
+
+    {% endif %}
+
+</body>
+{% endblock %}
+
+

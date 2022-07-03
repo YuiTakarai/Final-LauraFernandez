@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+
+<body>
+    <div>
+        <h3 style="text-align: center;">Crear Usuario</h3></br></br></br></br>
+
+            <form action="" method="POST" style="text-align: center;">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+        
+            </br> <button type="submit">Registrar</button>
+            </form>
+</br></br></br>
+    </div>
+</body>
+{% endblock %}

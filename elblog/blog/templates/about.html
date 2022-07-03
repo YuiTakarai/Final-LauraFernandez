@@ -1,0 +1,28 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+
+<div class="card mb-3">
+    <img src="{% static 'blog/assets/images/foto.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body" style="text-align:center  ;">
+      <h5 class="card-title">About Me</h5>
+      <p class="card-text"> Soy Laura Fernández de la comisión 36590.</br>
+        El blog corresponde al proyecto final del curso Python dictado por CoderHouse.</br>
+        Se utilizaron los siguientes recursos en la construcción del mismo:</br>
+            startbootstrap-blog-home-gh-pages para la parte estética del proyecto</br>
+            django para escribir el código del proyecto</br>
+            documentación de django para Signals , ModelForm, uso de Forms.</br>
+            tutoriales varios sobre django</br>
+            códigos html pre armados para tablas, tarjetas y otras</br>
+            ckeditor para que sea visulamente más cómodo escribir entradas en el blog</br>
+            fotos varias de internet</br>
+            café, café y más café...</br>
+        </ul>
+    </p>
+      <p class="card-text"><small class="text-muted">June 18, 2022</small></p>
+    </div>
+  </div>
+
+
+{% endblock %}

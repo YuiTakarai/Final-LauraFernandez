@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+<body>
+
+
+    <form action="entrada_blog" method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    
+    {{ form.media }}
+
+    {{ form.as_p }}
+
+
+   
+
+    <input type="submit" value="enviar">
+        
+
+    </form>
+
+
+
+</body>
+{% endblock %}

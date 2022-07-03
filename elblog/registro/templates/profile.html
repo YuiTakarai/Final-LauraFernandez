@@ -1,0 +1,64 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ detalle2.imagen.url }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{detalle.first_name}} {{detalle.last_name}}</h5>
+          <p class="card-text">{{detalle2.bio|safe}}</p>
+          {% if request.user.is_authenticated %}
+          <p class="card-text"><small class="text-muted">
+          <a href="{% url 'userprofile' %}">Editar Perfil</a> | 
+          <a href="{% url 'editprofile' %}">Editar Settings</a> |
+          <a href="{% url 'entrada_blog' %}">Nueva Entrada</a>
+        </small></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% if request.user.is_authenticated %}  
+<div><h4 style="text-align:center";>Publicaciones</h4>
+
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Autor</th>
+            <th scope="col">AutorId</th>
+            <th scope="col">Título</th>
+            <th scope="col">Subtítulo</th>
+            <th scope="col">Fecha Publicación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for n in publicaciones %}
+            <th scope="row">{{n.id}}</th>
+            <td>{{n.autor}}</td>
+            <td>{{n.autor_id}}</td>
+            <td>{{n.titulo}}</td>
+            <td>{{n.subtitulo}}</td>
+            <td>{{n.publicado}}</td>
+            <td><a href="{% url 'editar_entrada' n.id %}">Editar</a></td>
+            <td><a href="{% url 'eliminar_entrada' n.id %}">Eliminar</a></td> 
+
+          </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+
+  </div>
+  {% endif %}
+
+
+
+
+{% endblock %}

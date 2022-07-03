@@ -1,0 +1,56 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+    
+    <div class = "container">
+    <h2>{{ detalle.titulo}}</h2>
+    <img src="{{detalle.imagenblog.url}}" class="img-fluid rounded-start" alt="..." style="width:200px ;">
+    <p>{{ detalle.subtitulo}} | {{ detalle.autor.first_name}} {{detalle.autor.last_name}}</p>
+    
+    <p class="lead">{{ detalle.contenido|safe }}</p>
+    </div>
+    <div class = "container">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ detalle.autor.profile.imagen.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{detalle.autor.first_name}} {{detalle.autor.last_name}}</h5>
+              <a href="{% url 'viewprofile' detalle.autor.profile.id %}">Ir</a>
+              <p class="card-text">{{detalle.autor.profile.bio|truncatechars:200|safe}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class = "container">
+    <p>Comentarios</p>
+    {% if not detalle.comentario.all %}    
+
+    <p> No hay comentarios publicados </p>
+
+    {% else %}
+
+    {% for n in detalle.comentario.all %}
+
+    <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+        
+        <div class="comments" style="padding: 10px;"></div>
+        <p class="font-weight-bold">
+            {{n.nombre}}
+            <span class=" text-muted font-weight-normal">
+            {{n.fecha}}
+            </span> </p>
+            {{n.cuerpo | safe }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <a href = "{% url 'agregar_comentario' detalle.id %}"> Add Comment </a>
+
+  </div>
+
+{% endblock %}

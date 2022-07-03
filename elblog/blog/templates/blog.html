@@ -1,0 +1,47 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+<body>
+ 
+  <div class="card mb-3" style="max-width: 540px; margin: auto;">
+    {% for n in entrada %}
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{n.imagenblog.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{n.titulo}} | {{n.subtitulo}}</h5>
+          <h6 class="card-title">{{n.autor}} | {{n.publicado}}</h6>
+          <a href="{% url 'category' n.categoria_id %}">{{n.categoria.nombre}}</a>
+          <p>{{n.contenido|truncatechars:20|safe}}</p>
+          <p class="card-text"><small class="text-muted">
+          <a href="{% url 'detalle_blog' n.id %}">Leer Más</a> | 
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+</br>
+<hr>
+
+<div style="margin:auto">
+{% if entrada.has_previous %}
+<a href="?page=1">&laquo Primera Página</a>
+<a href="?page={{entrada.previous_page_number}}">Anterior</a>
+{% endif %}
+Página {{entrada.number}} de {{entrada.paginator.num_pages}}
+{% if entrada.has_next %}
+<a href="?page={{entrada.next_page_number}}">Siguiente</a>
+<a href="?page={{entrada.paginator.num_pages}}">&raquo Última Página</a>
+{% endif %}
+</tr>
+</div>
+
+
+</body>
+
+{% endblock %}

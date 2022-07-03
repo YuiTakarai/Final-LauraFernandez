@@ -1,0 +1,25 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+<body>
+    
+    {% if  request.user.is_authenticated %}
+
+    <div> 
+        <p>Cómo utilizar el sitio para publicar:</p>
+        <ul>
+            <li>Ingresar en Entrada Blog y completar los campos requeridos</li> | <a href="{% url 'entrada_blog'%}">Entrada Blog</a>
+            <li>Editar y Eliminar Posts: ingresá a tu perifl y desde allí administras tu contenido compartido</li> | <a href="{% url 'viewprofile' user.id %}">Ver Perfil</a> 
+            <li>Consultar el listado de categorias disponibles</li> | <a href="{% url 'listarcategorias' %}">Categorias</a>
+            <li>Crear nuevas categorías</li><a href="{% url 'categorias' %}">Nueva Categoria</a>
+        </ul>
+    {% endif %}
+    </div>
+
+    
+    
+</body>
+
+
+{% endblock %}

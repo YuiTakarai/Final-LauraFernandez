@@ -1,0 +1,22 @@
+{% extends "home.html" %}
+{% load static %}
+{% block contenido %}
+
+<body>
+</br>
+</br>
+</br>
+    <form action="" method="POST" style="text-align: center;">
+
+        {% csrf_token %}
+        
+        {{form.as_p}}
+
+    <button>Añadir Comentario</button> 
+    <a href="{% url 'blog' %}">Cancelar</a>
+
+    </form>
+
+</body>
+{% endblock %}
+
