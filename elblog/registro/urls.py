@@ -10,4 +10,5 @@ urlpatterns = [
     path("userprofile" , views.userprofile , name="userprofile"),
     path("editprofile" , views.editprofile , name="editprofile"),
     path("viewprofile/<int:id>" , views.profile , name="viewprofile"),
+    path("perfilautor/<int:id>" , views.perfilautor , name="perfilautor"),
 ]

@@ -108,32 +108,34 @@ def agregar_comentario(request, id):
 @login_required
 def editar_entrada(request, id):
     entrada = Blog.objects.get(id = id)
-    
-    if request.method == "POST":
-        form = Entrada_Blog(request.POST, request.FILES)
-        if form.is_valid():
-            datos = form.cleaned_data
-            #entrada.autor = datos['autor']
-            entrada.titulo = datos['titulo']
-            entrada.subtitulo = datos['subtitulo']
-            entrada.contenido = datos['contenido']
-            entrada.imagenblog = datos['imagenblog']
-            #entrada.publicado = datos['publicado']
-            entrada.save()
+    if entrada.autor == request.user.id:
+        if request.method == "POST":
+            form = Entrada_Blog(request.POST, request.FILES)
+            if form.is_valid():
+                datos = form.cleaned_data
+                #entrada.autor = datos['autor']
+                entrada.titulo = datos['titulo']
+                entrada.subtitulo = datos['subtitulo']
+                entrada.contenido = datos['contenido']
+                entrada.imagenblog = datos['imagenblog']
+                #entrada.publicado = datos['publicado']
+                entrada.save()
 
-            entrada = Blog.objects.all()
-            return render (request, "blog.html" , {'entrada': entrada})
-    else:
-        form = Entrada_Blog(initial={'titulo': entrada.titulo , 'subtitulo': entrada.subtitulo , 'contenido': entrada.contenido , 'imagenblog': entrada.imagenblog ,'publicado': datetime})
-    return render( request, "editar_entrada.html" , {'form': form , 'entrada': entrada} )
-
+                entrada = Blog.objects.all()
+                return render (request, "blog.html" , {'entrada': entrada})
+        else:
+            form = Entrada_Blog(initial={'titulo': entrada.titulo , 'subtitulo': entrada.subtitulo , 'contenido': entrada.contenido , 'imagenblog': entrada.imagenblog ,'publicado': datetime})
+        return render( request, "editar_entrada.html" , {'form': form , 'entrada': entrada} )
+    return HttpResponse("El usuario no puede editar esta entrada")
 
 @login_required
 def eliminar_entrada(request, id):
     entrada = Blog.objects.get(id=id)
-    entrada.delete()
+    if entrada.autor == request.user.id:
+        entrada.delete()
 
-    entrada = Blog.objects.all()
+        entrada = Blog.objects.all()
 
-    return render (request, "blog.html" , {"entradas": entrada})
-
+        return render (request, "blog.html" , {"entradas": entrada})
+    else:
+        return HttpResponse("El usuario no puede eliminar esta entrada")

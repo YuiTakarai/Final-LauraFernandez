@@ -81,7 +81,7 @@ def userprofile(request):
 
         return render(request, "userprofile.html" , {'form': form})
 
-
+@login_required
 def profile(request, id):
     detalle = get_object_or_404(User, id=id)
     detalle2 = get_object_or_404(Profile, id=id)
@@ -90,4 +90,8 @@ def profile(request, id):
     return render(request, "profile.html" , {'detalle': detalle , 'detalle2': detalle2, 'publicaciones': publicaciones, 'avatares': avatares})
 
 
-
+def perfilautor(request, id):
+    detalle = get_object_or_404(User, id=id)
+    detalle2 = get_object_or_404(Profile, id=id)
+    avatares = Profile.objects.filter(user=request.user.id)
+    return render(request, "perfilautor.html" , {'detalle': detalle , 'detalle2': detalle2, 'avatares': avatares})
